@@ -53,8 +53,6 @@ Masuk ke MySQL dari terminal, pilih database-nya, lalu jalankan perintah berikut
 SOURCE path_ke_folder_project_kamu/database/init.sql;
 ```
 
-Atau jalankan file `database/init.sql` melalui MySQL client/phpMyAdmin.
-
 ### 2. Install Dependencies
 
 ```bash
