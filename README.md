@@ -46,10 +46,11 @@ Pastikan MySQL sudah terinstall dan berjalan. Buat database baru:
 CREATE DATABASE purchase_system;
 ```
 
-Kemudian import file SQL untuk membuat tabel dan data awal:
+Lalu jalankan file SQL untuk membuat tabel dan data awal.
+Masuk ke MySQL dari terminal, pilih database-nya, lalu jalankan perintah berikut (sesuaikan dengan lokasi folder project kamu):
 
 ```bash
-mysql -u root -p purchase_system < database/init.sql
+SOURCE path_ke_folder_project_kamu/database/init.sql;
 ```
 
 Atau jalankan file `database/init.sql` melalui MySQL client/phpMyAdmin.
