@@ -93,7 +93,7 @@ Server akan berjalan di `http://localhost:3000`
 - **routes/index.js**: Route untuk halaman utama
 - **routes/admin.js**: Route untuk fitur admin (CRUD pembelian)
 - **views/**: Template EJS untuk tampilan
-- **public/**: Asset statis (CSS, JS, images)
+- **public/**: Asset statis (CSS)
 - **database/init.sql**: Script SQL untuk inisialisasi database
 
 ## Dependencies
