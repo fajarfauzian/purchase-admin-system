@@ -1,39 +1,51 @@
-<%- include('partials/header') %>
+<% const currentPage = 'add-purchase'; %>
+<%- include('partials/sidebar') %>
 
-<div class="row">
-    <div class="col-12">
-        <h1 class="mb-4">
-            <i class="bi bi-plus-circle"></i> Tambah Pembelian Baru
-        </h1>
-    </div>
+<div class="page-sidebar">
+    <h1>
+        <i class="bi bi-plus-circle"></i>
+        Tambah Pembelian Baru
+    </h1>
 </div>
 
 <% if (typeof success !== 'undefined' && success) { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle"></i> <%= success %>
+        <i class="bi bi-check-circle"></i>
+        <div>
+            <strong>Berhasil!</strong><br>
+            <%= success %>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 <% } %>
 
 <% if (typeof error !== 'undefined' && error) { %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-triangle"></i> <%= error %>
+        <i class="bi bi-exclamation-triangle"></i>
+        <div>
+            <strong>Error!</strong><br>
+            <%= error %>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 <% } %>
 
-<div class="row">
+<div class="row g-4">
     <div class="col-lg-8">
         <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">
-                    <i class="bi bi-cart-plus"></i> Form Pembelian
+            <div class="card-sidebar">
+                <h5>
+                    <i class="bi bi-cart-plus"></i>
+                    Form Pembelian
                 </h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="/admin/add-purchase" id="purchaseForm">
-                    <div class="mb-3">
-                        <label for="produk_id" class="form-label">Pilih Produk *</label>
+                    <div class="mb-4">
+                        <label for="produk_id" class="form-label">
+                            <i class="bi bi-box-seam"></i>
+                            Pilih Produk *
+                        </label>
                         <select class="form-select" id="produk_id" name="produk_id" required>
                             <option value="">-- Pilih Produk --</option>
                             <% if (products && products.length > 0) { %>
@@ -50,8 +62,11 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="qty" class="form-label">Jumlah (Qty) *</label>
+                    <div class="mb-4">
+                        <label for="qty" class="form-label">
+                            <i class="bi bi-123"></i>
+                            Jumlah (Qty) *
+                        </label>
                         <input 
                             type="number" 
                             class="form-control" 
@@ -62,12 +77,15 @@
                             required>
                         <div class="form-text">
                             <i class="bi bi-info-circle"></i> 
-                            Stok tersedia: <span id="stok-info">-</span>
+                            Stok tersedia: <span id="stok-info" class="fw-bold">-</span>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Total Harga</label>
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="bi bi-cash"></i>
+                            Total Harga
+                        </label>
                         <div class="input-group">
                             <span class="input-group-text">Rp</span>
                             <input 
@@ -75,22 +93,25 @@
                                 class="form-control" 
                                 id="total" 
                                 readonly 
-                                value="0">
+                                value="0"
+                                style="font-weight: 700; font-size: 1.1rem;">
                         </div>
                         <div class="form-text">
                             <i class="bi bi-calculator"></i> 
-                            Total dihitung otomatis: Harga × Qty
+                            Total dihitung otomatis: <strong>Harga × Qty</strong>
                         </div>
                     </div>
 
-                    <hr>
+                    <hr class="my-4">
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-3">
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> Simpan Pembelian
+                            <i class="bi bi-save"></i>
+                            Simpan Pembelian
                         </button>
                         <a href="/admin/purchases" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left"></i> Batal
+                            <i class="bi bi-arrow-left"></i>
+                            Batal
                         </a>
                     </div>
                 </form>
@@ -99,21 +120,71 @@
     </div>
 
     <div class="col-lg-4">
-        <div class="card bg-light">
+        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
             <div class="card-body">
-                <h5 class="card-title">
-                    <i class="bi bi-lightbulb"></i> Panduan
+                <h5 class="card-title mb-4">
+                    <i class="bi bi-lightbulb"></i>
+                    Panduan Penggunaan
                 </h5>
-                <ul class="mb-0">
-                    <li>Pilih produk yang ingin dibeli</li>
-                    <li>Masukkan jumlah pembelian</li>
-                    <li>Total harga akan dihitung otomatis</li>
-                    <li>Klik "Simpan Pembelian" untuk menyimpan</li>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-white bg-opacity-25 rounded-circle p-2" style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <strong>1</strong>
+                        </div>
+                        <div>
+                            <strong>Pilih Produk</strong>
+                            <p class="mb-0 small opacity-90">Pilih produk yang ingin dibeli dari dropdown</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-white bg-opacity-25 rounded-circle p-2" style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <strong>2</strong>
+                        </div>
+                        <div>
+                            <strong>Input Jumlah</strong>
+                            <p class="mb-0 small opacity-90">Masukkan jumlah yang ingin dibeli</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-white bg-opacity-25 rounded-circle p-2" style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <strong>3</strong>
+                        </div>
+                        <div>
+                            <strong>Cek Total</strong>
+                            <p class="mb-0 small opacity-90">Total harga akan dihitung otomatis</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-white bg-opacity-25 rounded-circle p-2" style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                            <strong>4</strong>
+                        </div>
+                        <div>
+                            <strong>Simpan</strong>
+                            <p class="mb-0 small opacity-90">Klik tombol simpan untuk menyimpan pembelian</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3">
+                    <i class="bi bi-info-circle text-primary"></i>
+                    Informasi Penting
+                </h6>
+                <ul class="small mb-0 ps-3">
+                    <li class="mb-2">Pastikan stok produk mencukupi sebelum membuat pembelian</li>
+                    <li class="mb-2">Total harga dihitung berdasarkan: <strong>Harga × Qty</strong></li>
+                    <li class="mb-2">Status pembelian otomatis menjadi <strong>"Aktif"</strong></li>
+                    <li class="mb-0">Pembelian dapat dibatalkan dari halaman riwayat</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+<%- include('partials/footer') %>
 
 <script>
     const produkSelect = document.getElementById('produk_id');
@@ -129,6 +200,7 @@
             const qty = parseInt(qtyInput.value) || 0;
             
             stokInfo.textContent = stok + ' unit';
+            stokInfo.className = 'fw-bold text-success';
             
             if (qty > stok) {
                 stokInfo.innerHTML = '<span class="text-danger">' + stok + ' unit (Qty melebihi stok!)</span>';
@@ -139,11 +211,24 @@
         } else {
             totalInput.value = '0';
             stokInfo.textContent = '-';
+            stokInfo.className = 'fw-bold';
         }
     }
 
     produkSelect.addEventListener('change', hitungTotal);
     qtyInput.addEventListener('input', hitungTotal);
-</script>
 
-<%- include('partials/footer') %>
+    document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+        const selectedOption = produkSelect.options[produkSelect.selectedIndex];
+        if (selectedOption.value) {
+            const stok = parseInt(selectedOption.dataset.stok);
+            const qty = parseInt(qtyInput.value) || 0;
+            
+            if (qty > stok) {
+                e.preventDefault();
+                alert('Jumlah pembelian melebihi stok yang tersedia!');
+                return false;
+            }
+        }
+    });
+</script>
