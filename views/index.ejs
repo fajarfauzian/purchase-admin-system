@@ -1,0 +1,145 @@
+<%- include('partials/header') %>
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </h1>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2 opacity-75">Total Produk</h6>
+                        <h2 class="card-title mb-0"><%= stats.totalProduk || 0 %></h2>
+                    </div>
+                    <i class="bi bi-box-seam fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card stat-card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2 opacity-75">Total Stok</h6>
+                        <h2 class="card-title mb-0"><%= stats.totalStok || 0 %></h2>
+                    </div>
+                    <i class="bi bi-archive fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card stat-card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2 opacity-75">Pembelian Aktif</h6>
+                        <h2 class="card-title mb-0"><%= stats.totalPembelianAktif || 0 %></h2>
+                    </div>
+                    <i class="bi bi-cart-check fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card stat-card bg-warning text-dark">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">Pembelian Batal</h6>
+                        <h2 class="card-title mb-0"><%= stats.totalPembelianBatal || 0 %></h2>
+                    </div>
+                    <i class="bi bi-x-circle fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card stat-card bg-secondary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2 opacity-75">Total Nilai Pembelian</h6>
+                        <h2 class="card-title mb-0">
+                            Rp <%= (stats.totalNilaiPembelian || 0).toLocaleString('id-ID') %>
+                        </h2>
+                    </div>
+                    <i class="bi bi-cash-stack fs-1 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">
+                    <i class="bi bi-clock-history"></i> Pembelian Terbaru
+                </h5>
+            </div>
+            <div class="card-body">
+                <% if (recentPurchases && recentPurchases.length > 0) { %>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Produk</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% recentPurchases.forEach(purchase => { %>
+                                    <tr>
+                                        <td>#<%= purchase.id %></td>
+                                        <td><%= purchase.produk %></td>
+                                        <td><%= purchase.qty %></td>
+                                        <td>Rp <%= purchase.total.toLocaleString('id-ID') %></td>
+                                        <td>
+                                            <% if (purchase.status === 'aktif') { %>
+                                                <span class="badge bg-success">Aktif</span>
+                                            <% } else { %>
+                                                <span class="badge bg-danger">Batal</span>
+                                            <% } %>
+                                        </td>
+                                        <td><%= new Date(purchase.tanggal).toLocaleString('id-ID') %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="/admin/purchases" class="btn btn-primary">
+                            Lihat Semua Riwayat <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                <% } else { %>
+                    <div class="text-center py-4 text-muted">
+                        <i class="bi bi-inbox fs-1"></i>
+                        <p class="mt-2">Belum ada data pembelian</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

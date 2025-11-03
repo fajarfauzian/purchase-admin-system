@@ -1,0 +1,31 @@
+</main>
+    <footer class="bg-light text-center py-3 mt-5">
+        <div class="container">
+            <p class="text-muted mb-0">
+                &copy; 2025 Purchase Admin System | Built with Node.js, Express & MySQL
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+       
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+
+        document.querySelectorAll('.btn-cancel-purchase').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (!confirm('Apakah Anda yakin ingin membatalkan pembelian ini?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
